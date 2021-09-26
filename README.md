@@ -14,12 +14,12 @@
 Clone this repository into `~/klipper_config_github`:
 ```shell
 cd
-git clone https://github.com/nielsvz/klipper_configuration.git klipper_config_github
+git clone https://github.com/nielsvz/klipper-configuration.git klipper_config_github
 ```
 
 After cloning the repository make sure to include the main config file into `printer.cfg`:
 ```shell
-echo '[include ../klipper_config_github/voron-2/main.cfg]'
+echo '[include ../klipper_config_github/voron-2/main.cfg]' > ~/klipper_config/printer.cfg
 ```
 
 ## Printers
