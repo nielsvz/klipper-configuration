@@ -76,58 +76,77 @@ print_end
 
 ### Between extrusion role change G-code
 SuperSlicer only
+
+Custom variables (Notes tab):
+```
+square_corner_velocity=8
+acc_first_layer=1500
+acc_externalperimeter=1000
+acc_perimeter=2000
+acc_infill_internal=7000
+acc_infill_solid=4000
+acc_infill_solid_top=2000
+acc_infill_bridge=5000
+acc_gapfill=2000
+acc_skirt=4000
+acc_supports=7000
+acc_thinwall=2000
+acc_default=4040
+```
+
+Between extrusion role change G-code (Custom G-code tab):
 ```
 {if layer_num <= 1};Layer [layer_num] FIRST
 {if extrusion_role=~/ExternalPerimeter/};[extrusion_role]0
-SET_VELOCITY_LIMIT ACCEL=500 ACCEL_TO_DECEL=500 SQUARE_CORNER_VELOCITY=8
+SET_VELOCITY_LIMIT ACCEL=[acc_first_layer] ACCEL_TO_DECEL=[acc_first_layer] SQUARE_CORNER_VELOCITY=[square_corner_velocity]
 
 {elsif extrusion_role=~/Perimeter/};[extrusion_role]
-SET_VELOCITY_LIMIT ACCEL=1000 ACCEL_TO_DECEL=1000 SQUARE_CORNER_VELOCITY=8
+SET_VELOCITY_LIMIT ACCEL=[acc_first_layer] ACCEL_TO_DECEL=[acc_first_layer] SQUARE_CORNER_VELOCITY=[square_corner_velocity]
 
 {else};[extrusion_role]
-SET_VELOCITY_LIMIT ACCEL=2000 ACCEL_TO_DECEL=1000 SQUARE_CORNER_VELOCITY=8
+SET_VELOCITY_LIMIT ACCEL=[acc_first_layer] ACCEL_TO_DECEL=[acc_first_layer] SQUARE_CORNER_VELOCITY=[square_corner_velocity]
 {endif}
 
 {else}
 {if extrusion_role=~/ExternalPerimeter/};[extrusion_role]0
-SET_VELOCITY_LIMIT ACCEL=1000 ACCEL_TO_DECEL=1000 SQUARE_CORNER_VELOCITY=8
+SET_VELOCITY_LIMIT ACCEL=[acc_externalperimeter] ACCEL_TO_DECEL=[acc_externalperimeter] SQUARE_CORNER_VELOCITY=[square_corner_velocity]
 
 {elsif extrusion_role=~/Perimeter/};[extrusion_role]
-SET_VELOCITY_LIMIT ACCEL=2000 ACCEL_TO_DECEL=2000 SQUARE_CORNER_VELOCITY=8
+SET_VELOCITY_LIMIT ACCEL=[acc_perimeter] ACCEL_TO_DECEL=[acc_perimeter] SQUARE_CORNER_VELOCITY=[square_corner_velocity]
 
 {elsif extrusion_role=~/OverhangPerimeter/};[extrusion_role]
-SET_VELOCITY_LIMIT ACCEL=2000 ACCEL_TO_DECEL=2000 SQUARE_CORNER_VELOCITY=8
+SET_VELOCITY_LIMIT ACCEL=[acc_perimeter] ACCEL_TO_DECEL=[acc_perimeter] SQUARE_CORNER_VELOCITY=[square_corner_velocity]
 
 {elsif extrusion_role=~/InternalInfill/};[extrusion_role]
-SET_VELOCITY_LIMIT ACCEL=7000 ACCEL_TO_DECEL=7000 SQUARE_CORNER_VELOCITY=8
+SET_VELOCITY_LIMIT ACCEL=[acc_infill_internal] ACCEL_TO_DECEL=[acc_infill_internal] SQUARE_CORNER_VELOCITY=[square_corner_velocity]
 PAUSE_INFILL EXECUTE=1 EXTRUSION_ROLE=[extrusion_role]
 
 {elsif extrusion_role=~/TopSolidInfill/};[extrusion_role]
-SET_VELOCITY_LIMIT ACCEL=2000 ACCEL_TO_DECEL=2000 SQUARE_CORNER_VELOCITY=8
+SET_VELOCITY_LIMIT ACCEL=[acc_infill_solid_top] ACCEL_TO_DECEL=[acc_infill_solid_top] SQUARE_CORNER_VELOCITY=[square_corner_velocity]
 
 {elsif extrusion_role=~/SolidInfill/};[extrusion_role]
-SET_VELOCITY_LIMIT ACCEL=4000 ACCEL_TO_DECEL=4000 SQUARE_CORNER_VELOCITY=8
+SET_VELOCITY_LIMIT ACCEL=[acc_infill_solid] ACCEL_TO_DECEL=[acc_infill_solid] SQUARE_CORNER_VELOCITY=[square_corner_velocity]
 
 {elsif extrusion_role=~/BridgeInfill/};[extrusion_role]
-SET_VELOCITY_LIMIT ACCEL=5000 ACCEL_TO_DECEL=5000 SQUARE_CORNER_VELOCITY=8
+SET_VELOCITY_LIMIT ACCEL=[acc_infill_bridge] ACCEL_TO_DECEL=[acc_infill_bridge] SQUARE_CORNER_VELOCITY=[square_corner_velocity]
 
 {elsif extrusion_role=~/GapFill/};[extrusion_role]
-SET_VELOCITY_LIMIT ACCEL=2000 ACCEL_TO_DECEL=2000 SQUARE_CORNER_VELOCITY=8
+SET_VELOCITY_LIMIT ACCEL=[acc_gapfill] ACCEL_TO_DECEL=[acc_gapfill] SQUARE_CORNER_VELOCITY=[square_corner_velocity]
 
 {elsif extrusion_role=~/Skirt/};[extrusion_role]
-SET_VELOCITY_LIMIT ACCEL=7000 ACCEL_TO_DECEL=7000 SQUARE_CORNER_VELOCITY=8
+SET_VELOCITY_LIMIT ACCEL=[acc_skirt] ACCEL_TO_DECEL=[acc_skirt] SQUARE_CORNER_VELOCITY=[square_corner_velocity]
 
 {elsif extrusion_role=~/SupportMaterial/};[extrusion_role]
-SET_VELOCITY_LIMIT ACCEL=7000 ACCEL_TO_DECEL=7000 SQUARE_CORNER_VELOCITY=8
+SET_VELOCITY_LIMIT ACCEL=[acc_supports] ACCEL_TO_DECEL=[acc_supports] SQUARE_CORNER_VELOCITY=[square_corner_velocity]
 
 {elsif extrusion_role=~/SupportMaterialInterface/};[extrusion_role]
-SET_VELOCITY_LIMIT ACCEL=7000 ACCEL_TO_DECEL=7000 SQUARE_CORNER_VELOCITY=8
+SET_VELOCITY_LIMIT ACCEL=[acc_supports] ACCEL_TO_DECEL=[acc_supports] SQUARE_CORNER_VELOCITY=[square_corner_velocity]
 
 {elsif extrusion_role=~/ThinWall/};[extrusion_role]
-SET_VELOCITY_LIMIT ACCEL=2000 ACCEL_TO_DECEL=2000 SQUARE_CORNER_VELOCITY=8
+SET_VELOCITY_LIMIT ACCEL=[acc_thinwall] ACCEL_TO_DECEL=[acc_thinwall] SQUARE_CORNER_VELOCITY=[square_corner_velocity]
 
 {else};[extrusion_role]
-SET_VELOCITY_LIMIT ACCEL=4040 ACCEL_TO_DECEL=4040 SQUARE_CORNER_VELOCITY=8
+SET_VELOCITY_LIMIT ACCEL=[acc_default] ACCEL_TO_DECEL=[acc_default] SQUARE_CORNER_VELOCITY=[square_corner_velocity]
 {endif}
 {endif}
 ```
