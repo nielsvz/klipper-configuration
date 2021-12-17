@@ -2,13 +2,12 @@
 
 - [Setup](#setup)
 - [Printers](#printers)
-  - [Voron 0.1](#voron-01)
   - [Voron 2.4](#voron-24)
     - [Dockable probe (temporary until merged with Klipper)](#dockable-probe-temporary-until-merged-with-klipper)
 - [Slicer configuration](#slicer-configuration)
   - [Start gcode](#start-gcode)
   - [End gcode](#end-gcode)
-  - [Between extrusion role change G-code](#between-extrusion-role-change-g-code)
+  - [Between extrusion role change G-code (deprecated)](#between-extrusion-role-change-g-code-deprecated)
 
 ## Setup
 
@@ -24,12 +23,6 @@ echo '[include ../klipper_config/github/voron-2/main.cfg]' > ~/klipper_config/pr
 ```
 
 ## Printers
-### Voron 0.1
-Klipper config for Voron 0.1
-- SKR E3 Mini V2.0 (4x TMC2209)
-- 2x 1.8 degree steppers for A/B (LDO - 40mm nema 14spec for Voron 0.1)
-- 1x 1.8 degree stepper for Z (Prusa MK3S Z-motor with integrated leadscrew)
-- 1x 1.8 degree stepper for extruder (LDO - 17mm nema 14)
 
 ### Voron 2.4
 Klipper config for Voron 2.4 
@@ -74,7 +67,7 @@ PrusaSlicer and SuperSlicer:
 print_end
 ```
 
-### Between extrusion role change G-code
+### Between extrusion role change G-code (deprecated)
 SuperSlicer only
 ```
 {if layer_num <= 1};Layer [layer_num] FIRST
