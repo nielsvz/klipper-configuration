@@ -1,2 +1,2 @@
-/input_shaper/2022-05-21/resonances_x_20220521_204959.csv - 0.03081503
-/input_shaper/2022-05-21/resonances_y_20220521_205239.csv - 0.0331549
+/input_shaper/2022-05-22/resonances_x_20220522_092825.csv - 0.0331549
+/input_shaper/2022-05-22/resonances_y_20220522_093052.csv - 0.03141284
