@@ -61,6 +61,11 @@ M109 S0 ; uncomment to remove set&wait temp gcode added automatically after this
 print_start EXTRUDER_TEMP={first_layer_temperature[initial_extruder] + extruder_temperature_offset[initial_extruder]} BED_TEMP=[first_layer_bed_temperature] CHAMBER_TEMP=[chamber_temperature] NOZZLE_SIZE=[nozzle_diameter] FILAMENT_TYPE=[filament_type]
 ```
 
+Cura 5.0:
+```
+PRINT_START EXTRUDER_TEMP={material_print_temperature_layer_0} BED_TEMP={material_bed_temperature_layer_0} NOZZLE_SIZE={machine_nozzle_size} FILAMENT_TYPE={material_type} CHAMBER={build_volume_temperature} BED_MESH=1
+```
+
 ### End gcode
 PrusaSlicer and SuperSlicer:
 ```
