@@ -7,7 +7,6 @@
 - [Slicer configuration](#slicer-configuration)
   - [Start gcode](#start-gcode)
   - [End gcode](#end-gcode)
-  - [Between extrusion role change G-code (deprecated)](#between-extrusion-role-change-g-code-deprecated)
 
 ## Setup
 
@@ -51,81 +50,30 @@ PrusaSlicer:
 ```
 M140 S0
 M104 S0 ; uncomment to remove set&wait temp gcode added automatically after this start gcode
-print_start EXTRUDER_TEMP=[first_layer_temperature] BED_TEMP=[first_layer_bed_temperature] NOZZLE_SIZE=[nozzle_diameter] FILAMENT_TYPE=[filament_type]
+PRINT_START EXTRUDER_TEMP=[first_layer_temperature] BED_TEMP=[first_layer_bed_temperature] NOZZLE_SIZE=[nozzle_diameter] FILAMENT_TYPE=[filament_type] BED_MESH=0
 ```
 
 SuperSlicer:  
 ```
 M190 S0
-M109 S0 ; uncomment to remove set&wait temp gcode added automatically after this start gcode
-print_start EXTRUDER_TEMP={first_layer_temperature[initial_extruder] + extruder_temperature_offset[initial_extruder]} BED_TEMP=[first_layer_bed_temperature] CHAMBER_TEMP=[chamber_temperature] NOZZLE_SIZE=[nozzle_diameter] FILAMENT_TYPE=[filament_type]
+M109 S0
+PRINT_START EXTRUDER_TEMP={first_layer_temperature[initial_extruder] + extruder_temperature_offset[initial_extruder]} BED_TEMP=[first_layer_bed_temperature] CHAMBER_TEMP=[chamber_temperature] NOZZLE_SIZE=[nozzle_diameter] FILAMENT_TYPE=[filament_type] BED_MESH=0
 ```
 
 Cura 5.0:
 ```
-PRINT_START EXTRUDER_TEMP={material_print_temperature_layer_0} BED_TEMP={material_bed_temperature_layer_0} NOZZLE_SIZE={machine_nozzle_size} FILAMENT_TYPE={material_type} CHAMBER={build_volume_temperature} BED_MESH=1
+PRINT_START EXTRUDER_TEMP={material_print_temperature_layer_0} BED_TEMP={material_bed_temperature_layer_0} NOZZLE_SIZE={machine_nozzle_size} FILAMENT_TYPE={material_type} CHAMBER={build_volume_temperature} BED_MESH=0
+```
+
+IdeaMaker
+```
+M104 S0
+M140 S0
+PRINT_START EXTRUDER_TEMP={temperature_extruder1} BED_TEMP={temperature_heatbed} NOZZLE_SIZE={machine_nozzle_diameter1} FILAMENT_TYPE={filament_name_abbreviation1} BED_MESH=0
 ```
 
 ### End gcode
-PrusaSlicer and SuperSlicer:
+Any slicer:
 ```
-print_end
-```
-
-### Between extrusion role change G-code (deprecated)
-SuperSlicer only
-```
-{if layer_num <= 1};Layer [layer_num] FIRST
-{if extrusion_role=~/ExternalPerimeter/};[extrusion_role]0
-SET_VELOCITY_LIMIT ACCEL=500 ACCEL_TO_DECEL=500 SQUARE_CORNER_VELOCITY=8
-
-{elsif extrusion_role=~/Perimeter/};[extrusion_role]
-SET_VELOCITY_LIMIT ACCEL=1000 ACCEL_TO_DECEL=1000 SQUARE_CORNER_VELOCITY=8
-
-{else};[extrusion_role]
-SET_VELOCITY_LIMIT ACCEL=2000 ACCEL_TO_DECEL=1000 SQUARE_CORNER_VELOCITY=8
-{endif}
-
-{else}
-{if extrusion_role=~/ExternalPerimeter/};[extrusion_role]0
-SET_VELOCITY_LIMIT ACCEL=1000 ACCEL_TO_DECEL=1000 SQUARE_CORNER_VELOCITY=8
-
-{elsif extrusion_role=~/Perimeter/};[extrusion_role]
-SET_VELOCITY_LIMIT ACCEL=2000 ACCEL_TO_DECEL=2000 SQUARE_CORNER_VELOCITY=8
-
-{elsif extrusion_role=~/OverhangPerimeter/};[extrusion_role]
-SET_VELOCITY_LIMIT ACCEL=2000 ACCEL_TO_DECEL=2000 SQUARE_CORNER_VELOCITY=8
-
-{elsif extrusion_role=~/InternalInfill/};[extrusion_role]
-SET_VELOCITY_LIMIT ACCEL=7000 ACCEL_TO_DECEL=7000 SQUARE_CORNER_VELOCITY=8
-PAUSE_INFILL EXECUTE=1 EXTRUSION_ROLE=[extrusion_role]
-
-{elsif extrusion_role=~/TopSolidInfill/};[extrusion_role]
-SET_VELOCITY_LIMIT ACCEL=2000 ACCEL_TO_DECEL=2000 SQUARE_CORNER_VELOCITY=8
-
-{elsif extrusion_role=~/SolidInfill/};[extrusion_role]
-SET_VELOCITY_LIMIT ACCEL=4000 ACCEL_TO_DECEL=4000 SQUARE_CORNER_VELOCITY=8
-
-{elsif extrusion_role=~/BridgeInfill/};[extrusion_role]
-SET_VELOCITY_LIMIT ACCEL=5000 ACCEL_TO_DECEL=5000 SQUARE_CORNER_VELOCITY=8
-
-{elsif extrusion_role=~/GapFill/};[extrusion_role]
-SET_VELOCITY_LIMIT ACCEL=2000 ACCEL_TO_DECEL=2000 SQUARE_CORNER_VELOCITY=8
-
-{elsif extrusion_role=~/Skirt/};[extrusion_role]
-SET_VELOCITY_LIMIT ACCEL=7000 ACCEL_TO_DECEL=7000 SQUARE_CORNER_VELOCITY=8
-
-{elsif extrusion_role=~/SupportMaterial/};[extrusion_role]
-SET_VELOCITY_LIMIT ACCEL=7000 ACCEL_TO_DECEL=7000 SQUARE_CORNER_VELOCITY=8
-
-{elsif extrusion_role=~/SupportMaterialInterface/};[extrusion_role]
-SET_VELOCITY_LIMIT ACCEL=7000 ACCEL_TO_DECEL=7000 SQUARE_CORNER_VELOCITY=8
-
-{elsif extrusion_role=~/ThinWall/};[extrusion_role]
-SET_VELOCITY_LIMIT ACCEL=2000 ACCEL_TO_DECEL=2000 SQUARE_CORNER_VELOCITY=8
-
-{else};[extrusion_role]
-SET_VELOCITY_LIMIT ACCEL=4040 ACCEL_TO_DECEL=4040 SQUARE_CORNER_VELOCITY=8
-{endif}
-{endif}
+PRINT_END
 ```
