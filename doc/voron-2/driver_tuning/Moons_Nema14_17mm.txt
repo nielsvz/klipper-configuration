@@ -1,0 +1,8 @@
+[tmc2209 stepper_e]
+interpolate: False
+sense_resistor: 0.110
+run_current: 0.552
+driver_TBL: 1
+driver_TOFF: 3
+driver_HSTRT: 7
+driver_HEND: 9
