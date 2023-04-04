@@ -1,0 +1,7 @@
+[tmc2209 stepper_z]
+sense_resistor: 0.110
+run_current: 0.976  # results in CS 31
+driver_TBL: 1
+driver_TOFF: 3  # 41.7kHz max chopper frequency
+driver_HSTRT: 7
+driver_HEND: 8
