@@ -1,0 +1,7 @@
+[tmc2209 extruder]
+sense_resistor: 0.110
+run_current: 0.552  # results in CS 17
+driver_TBL: 1
+driver_TOFF: 3  # 41.7kHz max chopper frequency
+driver_HSTRT: 7
+driver_HEND: 8
