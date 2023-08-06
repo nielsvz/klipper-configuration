@@ -1,0 +1,15 @@
+[tmc5160 stepper_x]
+sense_resistor: 0.075
+run_current: 1.414  # results in CS 16
+driver_TBL: 2
+driver_TOFF: 3  # 41.7kHz max chopper frequency
+driver_HSTRT: 7
+driver_HEND: 6
+
+[tmc5160 stepper_x]
+sense_resistor: 0.075
+run_current: 1.637  # results in CS 21
+driver_TBL: 2
+driver_TOFF: 3  # 41.7kHz max chopper frequency
+driver_HSTRT: 7
+driver_HEND: 7
