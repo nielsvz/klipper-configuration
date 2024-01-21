@@ -1,0 +1,11 @@
+[tmc2209 extruder]
+interpolate: True
+sense_resistor: 0.110
+stealthchop_threshold: 0
+run_current: 0.6732
+
+# CS = 21
+driver_TBL: 2
+driver_TOFF: 3  # 39,5kHz max chopper frequency
+driver_HSTRT: 7
+driver_HEND: 15
